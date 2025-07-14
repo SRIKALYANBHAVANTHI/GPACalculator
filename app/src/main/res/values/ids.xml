@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="course1Grade" type="id">Course 1</item>
+    <item name="course2Grade" type="id">Course2</item>
+    <item name="course3Grade" type="id">Course3</item>
+    <item name="gpaDisplay" type="id">GPA</item>
+    <item name="computeButton" type="id">ComputeButton</item>
+    <item name="course4Grade" type="id">Course4</item>
+    <item name="course5Grade" type="id">Course5</item>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GPA Calculator</string>
+    <string name="enter_grade_for_course_1">Enter grade for Course 1</string>
+    <string name="enter_grade_for_course_2">Enter grade for Course 2</string>
+    <string name="enter_grade_for_course_3">Enter grade for Course 3</string>
+    <string name="enter_grade_for_course_4">Enter grade for Course 4</string>
+    <string name="enter_grade_for_course_5">Enter grade for Course 5</string>
+    <string name="compute_gpa">Compute GPA</string>
+    <string name="gpa">GPA:</string>
+</resources>

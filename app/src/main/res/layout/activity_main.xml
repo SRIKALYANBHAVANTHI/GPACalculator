@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextCourse1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_grade_for_course_1"
+        android:inputType="numberDecimal"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/editTextCourse2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_grade_for_course_2"
+        android:inputType="numberDecimal"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/editTextCourse3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_grade_for_course_3"
+        android:inputType="numberDecimal"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/editTextCourse4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_grade_for_course_4"
+        android:inputType="numberDecimal"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/editTextCourse5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_grade_for_course_5"
+        android:inputType="numberDecimal"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/buttonCompute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/compute_gpa"/>
+
+    <TextView
+        android:id="@+id/textViewGPA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonCompute"
+        android:layout_marginTop="16dp"
+        android:text="@string/gpa"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
