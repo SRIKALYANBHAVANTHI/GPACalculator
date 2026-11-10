@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     Button computeButton;
     TextView gpaDisplay;
 
-    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,67 +30,72 @@ public class MainActivity extends AppCompatActivity {
         computeButton = findViewById(R.id.computeButton);
         gpaDisplay = findViewById(R.id.gpaDisplay);
 
+        computeButton.setText("Compute GPA");
         computeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                computeGPA();
+                if ("Clear Form".contentEquals(computeButton.getText())) {
+                    clearForm();
+                } else {
+                    computeGPA();
+                }
             }
         });
-
-        // Set button text to "Compute GPA" initially
-        computeButton.setText("Compute GPA");
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     private void computeGPA() {
-        // Retrieve grades from EditText fields
-        String grade1 = course1Grade.getText().toString();
-        String grade2 = course2Grade.getText().toString();
-        String grade3 = course3Grade.getText().toString();
-        String grade4 = course4Grade.getText().toString();
-        String grade5 = course5Grade.getText().toString();
+        String[] gradeValues = {
+                course1Grade.getText().toString().trim(),
+                course2Grade.getText().toString().trim(),
+                course3Grade.getText().toString().trim(),
+                course4Grade.getText().toString().trim(),
+                course5Grade.getText().toString().trim()
+        };
 
-        // Check for empty fields
-        if (TextUtils.isEmpty(grade1) || TextUtils.isEmpty(grade2) || TextUtils.isEmpty(grade3)
-                || TextUtils.isEmpty(grade4) || TextUtils.isEmpty(grade5)) {
-            // Show error message if any field is empty
-            gpaDisplay.setText("Please fill all fields");
-            return;
+        for (String grade : gradeValues) {
+            if (TextUtils.isEmpty(grade)) {
+                gpaDisplay.setText("Please fill all fields");
+                return;
+            }
         }
 
-        // Convert grades to float
-        float g1 = Float.parseFloat(grade1);
-        float g2 = Float.parseFloat(grade2);
-        float g3 = Float.parseFloat(grade3);
-        float g4 = Float.parseFloat(grade4);
-        float g5 = Float.parseFloat(grade5);
+        try {
+            float total = 0f;
+            for (String gradeValue : gradeValues) {
+                float grade = Float.parseFloat(gradeValue);
+                if (Float.isNaN(grade) || Float.isInfinite(grade) || grade < 0f || grade > 100f) {
+                    gpaDisplay.setText("Enter grades between 0 and 100");
+                    return;
+                }
+                total += grade;
+            }
 
-        // Calculate GPA
-        float total = g1 + g2 + g3 + g4 + g5;
-        float gpa = total / 5;
+            float gpa = total / gradeValues.length;
+            gpaDisplay.setText(String.format("GPA: %.2f", gpa));
 
-        // Display GPA
-        gpaDisplay.setText(String.format("GPA: %.2f", gpa));
+            if (gpa < 60) {
+                gpaDisplay.setBackgroundColor(Color.RED);
+            } else if (gpa <= 79) {
+                gpaDisplay.setBackgroundColor(Color.YELLOW);
+            } else {
+                gpaDisplay.setBackgroundColor(Color.GREEN);
+            }
 
-        // Change background color based on GPA range
-        if (gpa < 60) {
-            gpaDisplay.setBackgroundColor(Color.RED);
-        } else if (gpa >= 60 && gpa <= 79) {
-            gpaDisplay.setBackgroundColor(Color.YELLOW);
-        } else {
-            gpaDisplay.setBackgroundColor(Color.GREEN);
+            computeButton.setText("Clear Form");
+        } catch (NumberFormatException e) {
+            gpaDisplay.setText("Please enter valid numeric grades");
         }
-
-        // Change button text to "Clear Form"
-        computeButton.setText("Clear Form");
     }
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Reset button text to "Compute GPA" when resuming activity
+    private void clearForm() {
+        course1Grade.setText("");
+        course2Grade.setText("");
+        course3Grade.setText("");
+        course4Grade.setText("");
+        course5Grade.setText("");
+        gpaDisplay.setText("");
+        gpaDisplay.setBackgroundColor(Color.TRANSPARENT);
         computeButton.setText("Compute GPA");
     }
 }
